@@ -1,0 +1,71 @@
+# libraries
+import random
+from collections import Counter
+
+words = '''apple banana mango lemon coconut watermelon papaya'''
+word = words.split(' ')
+# Choose a secret random word
+random_word = random.choice(word)
+
+if __name__ == '__main__':
+    print('Guess the word! HINT: word is a name of a fruit')
+    for i in random_word:
+        # For printing the empty spaces for letters of the word
+        print('_', end=' ')
+    print()
+    playing = True
+    # list  for storing the letters the word guessed by player
+    letter_guessed =''
+    chances = len(random_word)+2
+    correct = 0
+    flag = 0
+    try :
+        while(chances != 0) and flag == 0: #flag is updated when the word is correctly guessed
+            print()
+            chances -= 1
+
+            try:
+                guess = str(input('Enter a letter to guess: '))
+            except:
+                print('Enter only a letter!')
+                continue
+
+            # Validation of the guess
+            if not guess.isalpha():
+                print('Enter only a letter')
+                continue
+
+            elif len(guess) > 1:
+                print('Enter only a single letter')
+                continue
+            elif guess in letter_guessed:
+                print('You have already guessed that letter')
+                continue
+            # if the letter is guessed correctly
+            if guess in random_word:
+                # k stores the number of times the guessed letter occurs in the word
+                k = random_word.count(guess)
+                for _ in range(k):
+                    letter_guessed += guess
+
+            for char in random_word:
+                if char in letter_guessed and (Counter(letter_guessed) != Counter(random_word)):
+                    print(char, end=' ')
+                    correct +1
+                # When all the word is guessed correctly
+                elif Counter(letter_guessed) == Counter(random_word):
+                    print(f"the word is : {random_word}")
+                    flag = 1
+                    print("congratulation , You won!")
+                    break
+                    break
+                else:
+                    print('_', end =' ')
+        # if player uses all of his chances
+            if chances == 0 and (Counter(letter_guessed) != Counter(random_word)):
+                print('you lost! Try again...')
+                print('the word was {}'.format(random_word))
+    except:
+        print()
+        print('Bye! Try again...')
+        exit()
