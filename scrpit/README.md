@@ -1,1 +1,1 @@
-## All scripting python projects
+## All Python scripting projects
