@@ -1,3 +1,3 @@
 ## Webscraping projects
 
-- Sci-fi book name eith authors 
+- Sci-fi book with name of authors  
